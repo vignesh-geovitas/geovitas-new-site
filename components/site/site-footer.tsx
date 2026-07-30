@@ -69,7 +69,7 @@ export function SiteFooter() {
       <Container className="py-12 sm:py-14 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* Identity + registered contact */}
-          <div className="lg:col-span-4">
+          <div className="min-w-0 lg:col-span-4">
             {/* Brand book: the colour brandmark is for white backgrounds. */}
             <Logo variant="colour" width={148} />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-ink-500">

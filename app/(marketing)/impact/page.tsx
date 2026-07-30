@@ -160,7 +160,7 @@ export default function ImpactPage() {
       <section className="border-t border-ink-200 bg-ink-50">
         <Container className="py-16 sm:py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
+            <div className="min-w-0 lg:col-span-5">
               <Reveal>
                 <Eyebrow>Against target</Eyebrow>
               </Reveal>
@@ -191,7 +191,7 @@ export default function ImpactPage() {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-6 lg:col-start-7">
+            <div className="min-w-0 lg:col-span-6 lg:col-start-7">
               <StaggerGroup className="grid gap-10 sm:grid-cols-3" step={0.1}>
                 {TARGET_RINGS.map((ring) => (
                   <StaggerChild key={ring.label}>

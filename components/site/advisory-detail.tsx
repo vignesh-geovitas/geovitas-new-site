@@ -45,7 +45,7 @@ export function AdvisoryDetail({ vertical }: { vertical: AdvisoryVertical }) {
       <section className="border-t border-ink-200 bg-white">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
+            <div className="min-w-0 lg:col-span-6">
               <Reveal>
                 <h2 className="text-h2 font-bold text-ink-950">{vertical.headline}</h2>
               </Reveal>
@@ -58,7 +58,7 @@ export function AdvisoryDetail({ vertical }: { vertical: AdvisoryVertical }) {
               </div>
             </div>
 
-            <div className="lg:col-span-6">
+            <div className="min-w-0 lg:col-span-6">
               <Reveal y={24}>
                 <figure className="group relative aspect-[4/3] overflow-hidden rounded-card border border-ink-200 shadow-panel">
                   {/* Counter-scroll inside the fixed crop. The figure clips, so
@@ -140,7 +140,7 @@ export function AdvisoryDetail({ vertical }: { vertical: AdvisoryVertical }) {
       <section className="border-t border-ink-200 bg-white">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-4">
+            <div className="min-w-0 lg:col-span-4">
               <Reveal>
                 <Eyebrow>What we deliver</Eyebrow>
               </Reveal>
@@ -169,7 +169,7 @@ export function AdvisoryDetail({ vertical }: { vertical: AdvisoryVertical }) {
               )}
             </div>
 
-            <div className="lg:col-span-7 lg:col-start-6">
+            <div className="min-w-0 lg:col-span-7 lg:col-start-6">
               <StaggerList className="space-y-0">
                 {vertical.deliverables.map((deliverable) => (
                   <StaggerItem

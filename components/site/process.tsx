@@ -37,7 +37,7 @@ export function Process() {
             open on three columns of text under a heading, which is precisely
             where the page felt heaviest. */}
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-6">
+          <div className="min-w-0 lg:col-span-6">
             <Reveal>
               <Eyebrow>The engagement model</Eyebrow>
             </Reveal>
@@ -55,7 +55,7 @@ export function Process() {
             </Reveal>
           </div>
 
-          <div className="lg:col-span-5 lg:col-start-8">
+          <div className="min-w-0 lg:col-span-5 lg:col-start-8">
             <Reveal y={24}>
               <Parallax className="overflow-hidden rounded-card" speed={0.06}>
                 <ImageSlot id="process-engagement" sizes="(min-width: 1024px) 40vw, 100vw" />

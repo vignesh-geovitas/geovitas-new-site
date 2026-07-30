@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:overflow": "node scripts/check-overflow.mjs"
   },
   "dependencies": {
     "motion": "^12.42.2",
@@ -21,6 +22,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.11",
+    "puppeteer-core": "^25.4.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

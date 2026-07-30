@@ -102,7 +102,7 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
       <section className="border-t border-ink-200 bg-ink-50">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
+            <div className="min-w-0 lg:col-span-5">
               <Reveal>
                 <Eyebrow>The challenge</Eyebrow>
               </Reveal>
@@ -113,7 +113,7 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-6 lg:col-start-7">
+            <div className="min-w-0 lg:col-span-6 lg:col-start-7">
               <div className="space-y-5">
                 {capability.challenge.map((paragraph, index) => (
                   <Reveal key={index} delay={index * 0.06}>
@@ -149,13 +149,13 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
               />
 
               <div className="relative grid gap-8 lg:grid-cols-12 lg:gap-16">
-                <div className="lg:col-span-5">
+                <div className="min-w-0 lg:col-span-5">
                   <Eyebrow tone="dark">The technology</Eyebrow>
                   <h3 className="mt-6 text-h2 font-bold text-white">
                     {capability.technology.headline}
                   </h3>
                 </div>
-                <div className="lg:col-span-6 lg:col-start-7">
+                <div className="min-w-0 lg:col-span-6 lg:col-start-7">
                   <p className="text-lead text-ink-300">
                     {capability.technology.body}
                   </p>
@@ -210,7 +210,7 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
       <section className="border-t border-ink-200 bg-ink-50">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-4">
+            <div className="min-w-0 lg:col-span-4">
               <Reveal>
                 <Eyebrow>How it runs</Eyebrow>
               </Reveal>
@@ -228,7 +228,7 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-7 lg:col-start-6">
+            <div className="min-w-0 lg:col-span-7 lg:col-start-6">
               <StaggerList className="space-y-0" ordered step={0.08}>
                 {capability.stages.map((stage) => (
                   <StaggerItem
@@ -258,7 +258,7 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
       <section className="border-t border-ink-200 bg-white">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
+            <div className="min-w-0 lg:col-span-6">
               <Reveal>
                 <Eyebrow>What we deliver</Eyebrow>
               </Reveal>
@@ -283,7 +283,7 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
               </StaggerList>
             </div>
 
-            <div className="lg:col-span-5 lg:col-start-8">
+            <div className="min-w-0 lg:col-span-5 lg:col-start-8">
               <Reveal>
                 <div className="glass-strong rounded-card p-7 lg:p-8">
                   <p className="font-mono text-eyebrow uppercase text-ink-600">
@@ -315,7 +315,7 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
       <section className="border-t border-ink-200 bg-ink-50">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
+            <div className="min-w-0 lg:col-span-5">
               <Reveal>
                 <Eyebrow>Why it is urgent</Eyebrow>
               </Reveal>
@@ -333,7 +333,7 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-6 lg:col-start-7">
+            <div className="min-w-0 lg:col-span-6 lg:col-start-7">
               <div className="grid gap-5">
                 {/* glare off: these carry six lines of regulatory prose each,
                     and a moving highlight across body copy is unreadable. The

@@ -111,7 +111,7 @@ export default function ApproachPage() {
           <Container className="py-14 sm:py-16 lg:py-28">
             <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
               {/* ---- Stage identity ---- */}
-              <div className="lg:col-span-5">
+              <div className="min-w-0 lg:col-span-5">
                 <Reveal>
                   <span
                     className="flex h-12 w-12 items-center justify-center rounded-xl
@@ -153,7 +153,7 @@ export default function ApproachPage() {
               </div>
 
               {/* ---- What the stage delivers ---- */}
-              <div className="lg:col-span-6 lg:col-start-7">
+              <div className="min-w-0 lg:col-span-6 lg:col-start-7">
                 <Reveal>
                   <p className="text-[0.9375rem] leading-relaxed font-bold text-ink-950">
                     {phase.lead}

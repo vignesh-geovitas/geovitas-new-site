@@ -47,7 +47,7 @@ export function LegalScaffold({
 
         <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:gap-16">
           {/* ---- Contents rail ---- */}
-          <div className="lg:col-span-3">
+          <div className="min-w-0 lg:col-span-3">
             <div className="lg:sticky lg:top-28">
               <Reveal>
                 <p className="font-mono text-eyebrow uppercase text-ink-500">
@@ -81,7 +81,7 @@ export function LegalScaffold({
           </div>
 
           {/* ---- Clauses ---- */}
-          <div className="lg:col-span-8 lg:col-start-5">
+          <div className="min-w-0 lg:col-span-8 lg:col-start-5">
             <div className="space-y-12">
               {sections.map((section, index) => (
                 <Reveal key={section.id} delay={0.04}>

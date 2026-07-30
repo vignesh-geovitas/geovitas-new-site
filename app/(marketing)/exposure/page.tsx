@@ -64,7 +64,7 @@ export default function ExposurePage() {
       <section className="bg-white">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
+            <div className="min-w-0 lg:col-span-7">
               <Reveal>
                 <h2 className="text-h3 font-bold text-ink-950">
                   What each input means
@@ -86,7 +86,7 @@ export default function ExposurePage() {
               </dl>
             </div>
 
-            <div className="lg:col-span-5">
+            <div className="min-w-0 lg:col-span-5">
               <Reveal>
                 <h2 className="text-h3 font-bold text-ink-950">Phase-in schedule</h2>
               </Reveal>

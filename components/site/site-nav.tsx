@@ -279,7 +279,7 @@ export function SiteNav() {
         >
           <Container className="py-10">
             <div className="grid gap-10 lg:grid-cols-12">
-              <div className="lg:col-span-3">
+              <div className="min-w-0 lg:col-span-3">
                 <h2 className="font-mono text-eyebrow uppercase text-ink-500">
                   Advisory
                 </h2>
@@ -326,7 +326,7 @@ export function SiteNav() {
               </ul>
 
               {/* ---- Adjacent surfaces ---- */}
-              <div className="lg:col-span-3">
+              <div className="min-w-0 lg:col-span-3">
                 <h2 className="font-mono text-eyebrow uppercase text-ink-500">
                   Alongside
                 </h2>

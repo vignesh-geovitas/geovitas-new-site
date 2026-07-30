@@ -131,7 +131,7 @@ export default function CapabilitiesPage() {
       <section className="border-t border-ink-200 bg-ink-50">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
+            <div className="min-w-0 lg:col-span-5">
               <Reveal>
                 <Eyebrow>Where these sit</Eyebrow>
               </Reveal>
@@ -142,7 +142,7 @@ export default function CapabilitiesPage() {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-6 lg:col-start-7">
+            <div className="min-w-0 lg:col-span-6 lg:col-start-7">
               <Reveal>
                 <p className="text-lead text-ink-600">
                   All three belong to the Oil, Gas &amp; Energy practice, which

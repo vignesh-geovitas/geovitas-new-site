@@ -66,7 +66,7 @@ export function EvidencePanel() {
       <Container className="py-16 sm:py-20 lg:py-32">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           {/* ---- Copy ---- */}
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <Reveal>
               <Eyebrow>The evidence base</Eyebrow>
             </Reveal>
@@ -111,7 +111,7 @@ export function EvidencePanel() {
           </div>
 
           {/* ---- Instruments ---- */}
-          <div className="lg:col-span-6 lg:col-start-7">
+          <div className="min-w-0 lg:col-span-6 lg:col-start-7">
             <StaggerGroup className="grid gap-6 sm:grid-cols-2" step={0.08}>
               {TILES.map((tile) => (
                 <StaggerChild key={tile.label} className="h-full">

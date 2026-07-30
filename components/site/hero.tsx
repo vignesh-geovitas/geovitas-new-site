@@ -74,8 +74,13 @@ export function Hero() {
         {/* 7/5 rather than 6/6: the headline needs the wider measure to hold
             three lines, and the collage reads fine at the narrower width. */}
         <div className="grid items-center gap-16 lg:grid-cols-12 lg:gap-8">
-          {/* ---- Copy ---- */}
-          <div className="lg:col-span-7">
+          {/* ---- Copy ----
+              min-w-0: a grid item defaults to `min-width: auto`, so it cannot
+              shrink below its content's min-content width. The framework rail
+              in the glass panel below is intrinsically ~1080px wide, which
+              dragged this column — and therefore the whole hero — past the
+              viewport on phones. See the note in marquee.tsx. */}
+          <div className="min-w-0 lg:col-span-7">
             <Reveal>
               <Eyebrow tone="invert">
                 Climate infrastructure &middot; Project development &middot; Advisory
@@ -134,7 +139,7 @@ export function Hero() {
           </div>
 
           {/* ---- Product collage ---- */}
-          <div className="lg:col-span-5 lg:pl-4">
+          <div className="min-w-0 lg:col-span-5 lg:pl-4">
             <FloatingCollage />
           </div>
         </div>

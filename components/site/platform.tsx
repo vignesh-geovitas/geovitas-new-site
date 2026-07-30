@@ -79,8 +79,12 @@ export function Platform() {
 
       <Container className="relative py-16 sm:py-20 lg:py-32">
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
-          {/* ================= Left: copy and benefits ================= */}
-          <div className="lg:col-span-6">
+          {/* ================= Left: copy and benefits =================
+              min-w-0 on both columns — see the note in marquee.tsx. The rail
+              under the mockup is intrinsically ~1080px, and without this the
+              single mobile grid track sized to that and pushed the section
+              (and the document) off-screen. */}
+          <div className="min-w-0 lg:col-span-6">
             <Reveal>
               <Eyebrow>The platform</Eyebrow>
             </Reveal>
@@ -139,7 +143,7 @@ export function Platform() {
               product reads as the section's centre of gravity. Only from xl,
               where the container is capped and there is gutter to spend — at
               lg the column already touches the edge and this would clip. */}
-          <div className="lg:col-span-6 xl:-mr-10 2xl:-mr-16">
+          <div className="min-w-0 lg:col-span-6 xl:-mr-10 2xl:-mr-16">
             {/* Gentle counter-scroll on the product itself. Low speed and no
                 overscan — the mockup is not clipped, so growing it would only
                 soften the chrome. */}

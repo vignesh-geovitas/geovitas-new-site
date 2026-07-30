@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
@@ -66,9 +67,16 @@ const DIFFERENTIATORS = [
 ] as const;
 
 /**
- * People. Headshots have not been licensed for this site, so every entry
- * renders an initials monogram — a missing-image placeholder would be worse
- * than a deliberate typographic one.
+ * People. Headshots supplied by the company live in `public/team/`, named for
+ * the person so the mapping is checkable at a glance rather than by index.
+ *
+ * `photo` is optional on purpose. Anyone joining the page without a supplied
+ * headshot falls back to the initials monogram that every entry used before the
+ * photography landed — a deliberate typographic stand-in reads better than a
+ * broken image, and it means adding a person never blocks on a photo shoot.
+ *
+ * All six current files are square (800px to 1200px), which is what lets them
+ * be rendered as a circular avatar without art-directed cropping.
  *
  * NAME SPELLING. "Puthussery" follows the company's own published spelling.
  * Earlier collateral rendered it "Puthuserry"; the published page is the more
@@ -78,22 +86,27 @@ type Person = {
   name: string;
   role: string;
   bio: string;
+  /** Path under /public. Omit to fall back to the initials monogram. */
+  photo?: string;
 };
 
 const LEADERSHIP: readonly Person[] = [
   {
     name: "DSL Prasad",
     role: "Founder & Chairman",
+    photo: "/team/dsl-prasad.png",
     bio: "Former Executive Director at Indian Oil Corporation, with over forty years in oil and gas. A technology specialist, he leads innovation and technology at Geovitas. An alumnus of the College of Engineering, Guindy and IIT Delhi.",
   },
   {
     name: "Venu Puthussery",
     role: "Co-founder & CEO",
+    photo: "/team/venu-puthussery.png",
     bio: "Deep expertise in advising and building businesses, with a track record of driving profitable growth across roles. Global experience, financial acumen and resilient leadership; he champions sustainability as a driver of business growth and oversees partnerships and execution.",
   },
   {
     name: "Pradeep Kakkattil",
     role: "Co-founder & Director",
+    photo: "/team/pradeep-kakkattil.jpg",
     bio: "A serial entrepreneur with extensive climate experience at a global level. He co-founded the Health Innovation Exchange (HIEx) in Geneva and the Women in Innovation Fund (WiNFUND), and built the UN's largest HIV Technical Support Facility.",
   },
 ];
@@ -102,16 +115,19 @@ const ADVISORS: readonly Person[] = [
   {
     name: "Patricia O'Hayer",
     role: "Advisor",
+    photo: "/team/patricia-ohayer.jpg",
     bio: "A senior advisor and board member with over twenty years in communications, public affairs and global policy across health, sustainability and geopolitics. She has held senior leadership roles at Reckitt and within international organisations, working with UN agencies and multilateral partners.",
   },
   {
     name: "Pradeep Chintagunta",
     role: "Advisor",
+    photo: "/team/pradeep-chintagunta.jpg",
     bio: "Senior faculty at the University of Chicago Booth School of Business and a recognised authority on consumer behaviour, pricing and market design. He holds a PhD in Marketing from Northwestern University, with prior degrees from Banaras Hindu University and the Indian Institute of Management.",
   },
   {
     name: "Vinod Nambiar",
     role: "Advisor",
+    photo: "/team/vinod-nambiar.jpg",
     bio: "A technology and business leader with extensive experience in digital product strategy across martech and healthtech. He has co-founded and led digital ventures, combining engineering fundamentals with data-led marketing systems and innovation frameworks.",
   },
 ];
@@ -158,7 +174,7 @@ export default function AboutPage() {
       <section className="border-t border-ink-200 bg-white">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
+            <div className="min-w-0 lg:col-span-5">
               <Reveal>
                 <Eyebrow>What we do</Eyebrow>
               </Reveal>
@@ -169,7 +185,7 @@ export default function AboutPage() {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-6 lg:col-start-7">
+            <div className="min-w-0 lg:col-span-6 lg:col-start-7">
               <Reveal>
                 <p className="text-lead text-ink-600">
                   Geovitas is a technology-led climate business working across
@@ -240,7 +256,7 @@ export default function AboutPage() {
       <section className="border-t border-ink-200 bg-white">
         <Container className="py-16 sm:py-20 lg:py-32">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-4">
+            <div className="min-w-0 lg:col-span-4">
               <Reveal>
                 <Eyebrow>Where we work</Eyebrow>
               </Reveal>
@@ -271,7 +287,7 @@ export default function AboutPage() {
 
             {/* Practice names and modes come from lib/advisory.ts so this page
                 can never drift from /advisory. */}
-            <div className="lg:col-span-7 lg:col-start-6">
+            <div className="min-w-0 lg:col-span-7 lg:col-start-6">
               <StaggerGroup className="grid gap-5 sm:grid-cols-3" step={0.08}>
                 {VERTICALS.map((vertical) => (
                   <StaggerChild key={vertical.slug} className="h-full">
@@ -342,7 +358,7 @@ export default function AboutPage() {
       <section className="border-t border-ink-200 bg-white">
         <Container className="py-16 sm:py-20 lg:py-32">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
+            <div className="min-w-0 lg:col-span-5">
               <Reveal>
                 <Eyebrow>Ecosystem</Eyebrow>
               </Reveal>
@@ -364,7 +380,7 @@ export default function AboutPage() {
 
             {/* Set as text, not logos — see the sourcing note at the head of
                 this file. A name is enough to establish the relationship. */}
-            <div className="lg:col-span-6 lg:col-start-7">
+            <div className="min-w-0 lg:col-span-6 lg:col-start-7">
               <StaggerGroup className="grid gap-5 sm:grid-cols-2" step={0.08}>
                 {PARTNERS.map((partner) => (
                   <StaggerChild key={partner.name} className="h-full">
@@ -394,7 +410,7 @@ export default function AboutPage() {
       <section className="border-t border-ink-200 bg-ink-50">
         <Container className="py-16 sm:py-20 lg:py-32">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
+            <div className="min-w-0 lg:col-span-5">
               <Reveal>
                 <Eyebrow>The company</Eyebrow>
               </Reveal>
@@ -423,7 +439,7 @@ export default function AboutPage() {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-6 lg:col-start-7">
+            <div className="min-w-0 lg:col-span-6 lg:col-start-7">
               <Reveal>
                 <p className="text-lead text-ink-600">
                   The name is <em>geo</em> and <em>vitas</em> — earth and life.
@@ -494,15 +510,36 @@ function PersonCard({ person, delay }: { person: Person; delay: number }) {
       className="flex h-full flex-col rounded-card border border-ink-200 bg-white p-7 shadow-card
                  transition-colors duration-300 ease-brand hover:border-brand-cyan/50"
     >
-      {/* Monogram stands in for a headshot until photography is licensed. */}
-      <span
-        aria-hidden
-        className="tnum flex h-14 w-14 items-center justify-center rounded-full
-                   border border-ink-200 bg-ink-50 font-mono text-sm font-bold
-                   text-brand-cyan-ink"
-      >
-        {monogram(person.name)}
-      </span>
+      {person.photo ? (
+        /* The supplied headshots are square, so a fixed 80px box with
+           object-cover crops nothing meaningful. `alt` is empty and the box is
+           aria-hidden: the name is already the <h3> immediately below, and a
+           screen reader announcing "Photograph of Venu Puthussery" before
+           reading "Venu Puthussery" is pure duplication.
+
+           width/height are twice the rendered size so the image stays sharp on
+           a 2x display; `sizes` tells next/image the box is 80px CSS regardless
+           of breakpoint, so it never fetches the full 1080px original. */
+        <Image
+          src={person.photo}
+          alt=""
+          aria-hidden
+          width={160}
+          height={160}
+          sizes="80px"
+          className="h-20 w-20 shrink-0 rounded-full border border-ink-200 object-cover"
+        />
+      ) : (
+        /* Fallback for anyone added before their headshot is supplied. */
+        <span
+          aria-hidden
+          className="tnum flex h-20 w-20 items-center justify-center rounded-full
+                     border border-ink-200 bg-ink-50 font-mono text-sm font-bold
+                     text-brand-cyan-ink"
+        >
+          {monogram(person.name)}
+        </span>
+      )}
       <h3 className="mt-6 text-h3 font-bold text-ink-950">{person.name}</h3>
       <p className="mt-1.5 font-mono text-eyebrow uppercase text-ink-500">
         {person.role}

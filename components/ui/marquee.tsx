@@ -68,6 +68,19 @@ export function Marquee({
           "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
         WebkitMaskImage:
           "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+        /* THIS IS LOAD-BEARING, NOT AN OPTIMISATION.
+           The track below is `w-max` — as wide as every label laid end to end,
+           around 1080px. `overflow: hidden` clips that visually, but it does NOT
+           stop the track contributing its max-content width to this box's own
+           intrinsic width, and that measurement propagates all the way up. Drop
+           the rail into a grid item (which defaults to `min-width: auto`) and
+           the whole column inflates to ~1080px and runs off a phone screen —
+           which is exactly what it did to the hero and the platform section.
+           `contain: inline-size` makes this box's inline size independent of its
+           contents, so the rail can be placed anywhere without booby-trapping
+           the layout around it. The `min-w-0` on those grid items is the second
+           half of the same fix; either alone is enough, both is deliberate. */
+        contain: "inline-size",
       }}
     >
       <motion.div

@@ -158,7 +158,7 @@ export default function PlatformPage() {
       <section className="border-t border-ink-200 bg-ink-50">
         <Container className="py-14 sm:py-16 lg:py-28">
           <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
-            <div className="lg:col-span-6">
+            <div className="min-w-0 lg:col-span-6">
               <Reveal>
                 <Eyebrow>One inventory, mapped outward</Eyebrow>
               </Reveal>
@@ -191,7 +191,7 @@ export default function PlatformPage() {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-6">
+            <div className="min-w-0 lg:col-span-6">
               <Parallax speed={0.04} overscan={false}>
                 <PlatformMockup />
               </Parallax>
@@ -206,10 +206,10 @@ export default function PlatformPage() {
               wrong in ways engineers would catch. */}
           <Reveal y={24}>
             <div className="mt-16 grid gap-6 lg:grid-cols-12 lg:gap-10">
-              <div className="lg:col-span-7">
+              <div className="min-w-0 lg:col-span-7">
                 <ArchitectureDiagram />
               </div>
-              <div className="lg:col-span-5">
+              <div className="min-w-0 lg:col-span-5">
                 <Parallax className="overflow-hidden rounded-card" speed={0.06}>
                   <ImageSlot
                     id="platform-source-data"
@@ -306,7 +306,7 @@ export default function PlatformPage() {
       <section className="border-t border-ink-200 bg-white">
         <Container className="py-16 sm:py-20 lg:py-32">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-4">
+            <div className="min-w-0 lg:col-span-4">
               <Reveal>
                 <Eyebrow>Why it earns its place</Eyebrow>
               </Reveal>
@@ -324,7 +324,7 @@ export default function PlatformPage() {
               </Reveal>
             </div>
 
-            <div className="lg:col-span-7 lg:col-start-6">
+            <div className="min-w-0 lg:col-span-7 lg:col-start-6">
               <StaggerList className="space-y-0">
                 {OUTCOMES.map((outcome, index) => (
                   <StaggerItem
