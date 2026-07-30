@@ -1,26 +1,456 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------------------------------------------------------------------------
+   GEOVITAS DESIGN TOKENS — LIGHT-THEME ENTERPRISE
+
+   Colour values extracted from `geovitas brand book.pdf` (CMYK content streams)
+   and cross-validated against pixel samples of the master logo artwork.
+
+     Brand book CMYK         Token          Corroborating source
+     C100 M0 Y0   K0    ->   brand-cyan     logo px #00ADD9-#00B8E3
+     (gradient midpoint)->   brand-teal     logo px #0DBBB6 / #1ABBAD
+     C50  M0 Y100 K0    ->   brand-green    logo px #7EC248, GF360 deck #82C341
+     C0   M0 Y0   K85   ->   ink-600        GF360 deck #414042 (exact match)
+     C0   M0 Y5   K45   ->   ink-400
+
+   The ink ramp extends those two brand-book neutrals into a full institutional
+   scale. Rungs 600 and 400 are the brand book verbatim; the rest are derived.
+
+   TOKEN LAYERS — consume from the top down.
+     1. Primitive  --color-ink-*, --color-brand-*   raw ramp, rarely used direct
+     2. Semantic   --color-surface/text/hairline-*  what components should use
+     3. Accent     --color-brand-*-ink              contrast-safe text accents
+
+   Components should reach for layer 2. That is what makes a theme change a
+   six-line edit rather than a sixty-file one.
+--------------------------------------------------------------------------- */
+
+@theme {
+  /* -- Brand primaries -----------------------------------------------------
+     FILLS ONLY. Measured against white these are decorative, not legible:
+       brand-cyan  #00aeda  ->  2.60:1   fails WCAG AA for text
+       brand-green #82c341  ->  2.14:1   fails WCAG AA for text
+     Use them for button backgrounds, bars, dots and rules. For accented TEXT
+     on a light surface use the -ink rungs below.                            */
+  --color-brand-cyan: #00aeda;
+  --color-brand-cyan-hi: #3ec6e8; /* hover on dark surfaces only */
+  --color-brand-cyan-lo: #0090b6; /* pressed fill; 3.71:1 — large text only */
+  --color-brand-teal: #12bbb2; /* gradient midpoint only */
+  --color-brand-green: #82c341; /* reserved: verified + positive delta */
+  --color-brand-green-hi: #9ad260;
+
+  /* -- Accent-on-light -----------------------------------------------------
+     Hue-preserved deepenings of the primaries, tuned so accented text clears
+     WCAG AA on both white and the ink-50 paper band:
+       brand-cyan-ink  #007a9b -> 4.93:1 on white, 4.64:1 on paper
+       brand-green-ink #4a7a1f -> 5.13:1 on white, 4.82:1 on paper           */
+  --color-brand-cyan-ink: #007a9b;
+  --color-brand-green-ink: #4a7a1f;
+
+  /* -- Ink ramp ------------------------------------------------------------
+     Re-derived light-first. The old dark-surface rungs (850/800/700) collapsed
+     into one another on a white canvas; resolution now sits at the light end
+     where an enterprise layout actually needs it.                            */
+  --color-ink-950: #0b0c0d; /* primary text, dark anchor canvas   19.58:1 */
+  --color-ink-900: #131416; /* raised surface inside dark anchor          */
+  --color-ink-800: #1c1e20; /* dark-anchor hairline / track               */
+  --color-ink-700: #2a2c2f;
+  --color-ink-600: #414042; /* BRAND BOOK K85 — body copy        10.31:1 */
+  --color-ink-500: #6b6d70; /* muted / caption copy               5.19:1 */
+  --color-ink-400: #a7a9ac; /* BRAND BOOK K45 — 2.36:1, NEVER text       */
+  --color-ink-300: #c9cacb; /* strong hairline, form borders             */
+  --color-ink-250: #dcdddf; /* hairline on hover                         */
+  --color-ink-200: #e4e5e6; /* default hairline on light                 */
+  --color-ink-150: #eceded; /* subtle divider inside cards               */
+  --color-ink-100: #f2f3f3; /* sunken band                               */
+  --color-ink-50: #f7f8f8; /* paper canvas                              */
+
+  /* -- Semantic surfaces ---------------------------------------------------
+     The layer components should actually reference.                         */
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff; /* card sitting on paper */
+  --color-surface-sunken: var(--color-ink-50);
+  --color-surface-inverse: var(--color-ink-950);
+  --color-hairline: var(--color-ink-200);
+  --color-hairline-strong: var(--color-ink-300);
+  --color-text: var(--color-ink-950);
+  --color-text-body: var(--color-ink-600);
+  --color-text-muted: var(--color-ink-500);
+
+  /* -- Secondary palette --------------------------------------------------
+     Brand book: charts / infographics only, and "should not exceed 15% of
+     the overall space". Not used for surfaces or interactive elements.
+     chart-cream doubles as the warm note in the hero gradient mesh.          */
+  --color-chart-plum: #544b4e;
+  --color-chart-aqua: #82cbc4;
+  --color-chart-sand: #f4e06d;
+  --color-chart-moss: #b5cb6e;
+  --color-chart-cream: #efe7bc;
+  --color-chart-fern: #56ac61;
+
+  /* -- Type scale --------------------------------------------------------- */
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  /* Capped at 3.5rem, not 4.25rem. The hero headline is 52 characters; at the
+     larger size it broke to four lines in a six-column measure and pushed both
+     calls to action below the fold at 1440x950. Headline size is a conversion
+     decision before it is a typographic one. */
+  --text-display: clamp(2.5rem, 4.4vw, 3.5rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.03em;
+
+  --text-h2: clamp(1.875rem, 3.5vw, 3rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.025em;
+
+  --text-h3: 1.375rem;
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.015em;
+
+  --text-lead: 1.0625rem;
+  --text-lead--line-height: 1.65;
+
+  /* -- Elevation -----------------------------------------------------------
+     A light theme carries hierarchy in shadow rather than in surface value,
+     so the scale has to be deliberate. Shadows are near-neutral and very low
+     opacity — enterprise, not consumer.                                      */
+  --shadow-card: 0 1px 2px rgba(11, 12, 13, 0.04), 0 4px 12px -2px rgba(11, 12, 13, 0.05);
+  --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.05);
+  --shadow-panel: 0 24px 60px -24px rgba(11, 12, 13, 0.18);
+  --shadow-collage: 0 18px 48px -20px rgba(11, 12, 13, 0.22);
+
+  /* -- Geometry & motion -------------------------------------------------- */
+  --radius-card: 0.75rem;
+  --radius-btn: 0.5rem;
+  --ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-century-gothic), Futura, "Century Gothic", ui-sans-serif,
+    system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-text-body);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Cyan at full strength behind text is illegible (2.60:1). A tint of it
+     keeps the brand read while leaving the ink type intact. */
+  ::selection {
+    background-color: #cdeef7;
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-cyan-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------------------------------------------------------------------------
+   Signature gradient. Traced left-to-right across the master logo artwork:
+   #00AEDA -> #12BBB2 (~28%) -> #82C341. Used only as hairlines and small
+   accents, never as a large fill.
+--------------------------------------------------------------------------- */
+@utility brand-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-brand-cyan) 0%,
+    var(--color-brand-teal) 28%,
+    var(--color-brand-green) 100%
+  );
+}
+
+@utility brand-gradient-text {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-brand-cyan-ink) 0%,
+    #0e8f89 45%,
+    var(--color-brand-green-ink) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The same signature at full saturation, for the dark hero anchor. The -ink
+   deepenings above are tuned for white paper and go muddy on ink; here the raw
+   logo primaries carry it, and as a >2.5rem display heading the gradient clears
+   the 3:1 large-text floor against ink-950 comfortably. */
+@utility brand-gradient-text-bright {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-brand-cyan) 0%,
+    var(--color-brand-teal) 42%,
+    var(--color-brand-green-hi) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------------------------------------------------------------------------
+   GLASSMORPHISM
+
+   A white border on white glass over a white page is invisible, so the panel
+   edge cannot carry the effect on its own. What actually reads as glass on a
+   light canvas is three things together: a translucent fill, a bright 1px
+   inset highlight along the top, and a soft drop shadow that lifts the panel
+   off the mesh behind it. `saturate()` is what makes the brand colours bloom
+   through the blur instead of washing out to grey.
+
+   Panels sit over the brand meshes; keep text at ink-950 / ink-600 on them,
+   both of which still clear WCAG AA against the effective near-white fill.
+--------------------------------------------------------------------------- */
+@utility glass {
+  background-color: rgb(255 255 255 / 0.72);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgb(255 255 255 / 0.55);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.75),
+    0 20px 50px -24px rgb(11 12 13 / 0.18);
+}
+
+/* Text-dense panels: more fill, so long-form copy keeps its contrast. */
+@utility glass-strong {
+  background-color: rgb(255 255 255 / 0.88);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgb(255 255 255 / 0.7);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.8),
+    0 24px 60px -28px rgb(11 12 13 / 0.22);
+}
+
+/* The closing dark anchor — same construction, inverted. */
+@utility glass-dark {
+  background-color: rgb(255 255 255 / 0.06);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.1);
+}
+
+/* Tabular figures for every metric on the page — columns of numbers must
+   align, and proportional digits will not do it. */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ---------------------------------------------------------------------------
+   AMBIENT MOTION
+
+   Slow, low-amplitude drift for the brand-mesh blobs and decorative accents.
+   Transform / opacity only, so the work stays on the compositor and never
+   forces layout or repaints the blur. Amplitudes are deliberately small (3-6%)
+   — the mesh should breathe, not swim. Every parent that carries a mesh is
+   already `overflow-hidden`, so the drift never extends the document.
+
+   The prefers-reduced-motion rule in @layer base collapses all animation
+   duration to ~0 with !important, which overrides these shorthands too — so
+   this whole layer freezes to a static frame for anyone who asks for that.
+--------------------------------------------------------------------------- */
+@keyframes gv-drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4%, -3%, 0) scale(1.08);
+  }
+}
+@keyframes gv-drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.06);
+  }
+  to {
+    transform: translate3d(-5%, 4%, 0) scale(1);
+  }
+}
+@keyframes gv-drift-c {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 5%, 0) scale(1.1);
+  }
+}
+@keyframes gv-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+/* Mesh blobs. Staggered durations keep the three colours out of phase, which is
+   what reads as depth rather than one rigid wash sliding around. */
+.gv-blob-a {
+  animation: gv-drift-a 24s ease-in-out infinite alternate;
+}
+.gv-blob-b {
+  animation: gv-drift-b 31s ease-in-out infinite alternate;
+}
+.gv-blob-c {
+  animation: gv-drift-c 27s ease-in-out infinite alternate;
+}
+
+/* Gentle vertical bob for small decorative accents (orbs, chips). */
+.gv-float {
+  animation: gv-float 11s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   SECOND MOTION LAYER — SURFACES, NOT BLOBS
+
+   Everything above animates a decorative element's own transform. What follows
+   animates the SURFACE a component sits on: a sweep across an unfilled image
+   slot, a slow pan under a dot grid, a hue drift across a dark panel. Same
+   rules as above — compositor-friendly properties only, small amplitudes, and
+   the reduced-motion block in @layer base freezes every one of them.
+--------------------------------------------------------------------------- */
+
+/* Diagonal sweep. Marks a surface as PENDING rather than broken — an unfilled
+   image slot that is perfectly still reads as a layout bug, and one that
+   breathes reads as work in progress. Deliberately slow. */
+@keyframes gv-shimmer {
+  from {
+    transform: translate3d(-120%, 0, 0);
+  }
+  to {
+    transform: translate3d(220%, 0, 0);
+  }
+}
+
+.gv-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.gv-shimmer::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inline-size: 45%;
+  /* Skewed so the sweep crosses the panel on a diagonal; the brand tint keeps
+     it recognisably ours rather than a generic loading skeleton. */
+  transform: skewX(-14deg);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 174 218 / 0.09) 45%,
+    rgb(130 195 65 / 0.09) 60%,
+    transparent 100%
+  );
+  animation: gv-shimmer 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* Slow drift under a tiled dot grid. Applied to the background-position of the
+   element that carries the grid, so the texture creeps rather than the box
+   moving — the layout never shifts. */
+@keyframes gv-grid-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 88px 44px;
+  }
+}
+
+.gv-grid-pan {
+  animation: gv-grid-pan 42s linear infinite;
+}
+
+/* Hue and luminance drift for the glow behind a dark panel. Filter-only, so it
+   composites without touching layout, and the amplitude is small enough that
+   the colour never leaves the brand ramp. */
+@keyframes gv-aurora {
+  0%,
+  100% {
+    filter: hue-rotate(0deg) saturate(1);
+    opacity: 0.9;
+  }
+  50% {
+    filter: hue-rotate(-14deg) saturate(1.25);
+    opacity: 1;
+  }
+}
+
+.gv-aurora {
+  animation: gv-aurora 19s ease-in-out infinite;
+}
+
+/* A single expanding ring, for "live" indicators that want more presence than
+   Tailwind's animate-ping without becoming a heartbeat. */
+@keyframes gv-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.gv-ring {
+  animation: gv-ring 3.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   3D
+
+   One shared perspective value for every tilting surface on the site. Set on
+   the PARENT of the element that rotates — perspective on the rotating element
+   itself applies to its children, not to it, which is the usual reason a tilt
+   looks flat. 1100px is shallow enough to read as depth at card scale without
+   the trapezoidal distortion a tighter value produces at the corners.
+--------------------------------------------------------------------------- */
+@utility perspective-card {
+  perspective: 1100px;
+  perspective-origin: center;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
 }
