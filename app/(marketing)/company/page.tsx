@@ -10,10 +10,10 @@ import { Parallax } from "@/components/ui/parallax";
 import { PageHeader } from "@/components/site/page-header";
 import { PlaceholderBlock } from "@/components/site/placeholder-block";
 import { CtaBlock } from "@/components/site/cta-block";
-import { SECTORS } from "@/lib/sectors";
+import { VERTICALS } from "@/lib/advisory";
 
 export const metadata: Metadata = {
-  title: "About — Making Climate Action Count",
+  title: "Company — Making Climate Action Count",
   description:
     "Geovitas builds the data infrastructure that turns emissions measurement into market access, regulatory compliance into value streams, and environmental accountability into competitive advantage.",
 };
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
  *   - The forward-looking ambition figures carried on both sources (client
  *     counts and tCO₂e reduction "by 2028"). They are targets, and the rest of
  *     this site holds a strict line against unverifiable numbers — see the
- *     sourcing note in lib/sectors.ts and the disclaimer on /exposure.
+ *     sourcing note in lib/advisory.ts and the disclaimer on /exposure.
  *   - Partner logos. The names below are set as text because no logo files or
  *     usage licences have been supplied; the names themselves are published by
  *     Geovitas already.
@@ -257,8 +257,8 @@ export default function AboutPage() {
               </Reveal>
               <Reveal delay={0.16}>
                 <div className="mt-8 flex flex-col gap-3">
-                  <Button href="/sectors" variant="outline" size="md" className="justify-between">
-                    All sector practices
+                  <Button href="/advisory" variant="outline" size="md" className="justify-between">
+                    All advisory verticals
                     <ArrowRight />
                   </Button>
                   <Button href="/platform" variant="outline" size="md" className="justify-between">
@@ -269,21 +269,21 @@ export default function AboutPage() {
               </Reveal>
             </div>
 
-            {/* Practice names and modes come from lib/sectors.ts so this page
-                can never drift from /sectors. */}
+            {/* Practice names and modes come from lib/advisory.ts so this page
+                can never drift from /advisory. */}
             <div className="lg:col-span-7 lg:col-start-6">
               <StaggerGroup className="grid gap-5 sm:grid-cols-3" step={0.08}>
-                {SECTORS.map((sector) => (
-                  <StaggerChild key={sector.slug} className="h-full">
+                {VERTICALS.map((vertical) => (
+                  <StaggerChild key={vertical.slug} className="h-full">
                     <div className="flex h-full flex-col rounded-card border border-ink-200 bg-white p-6 shadow-card">
                       <span className="tnum font-mono text-xs font-bold text-brand-cyan-ink">
-                        {sector.index}
+                        {vertical.index}
                       </span>
                       <h3 className="mt-4 text-[0.9375rem] font-bold text-ink-950">
-                        {sector.practice}
+                        {vertical.practice}
                       </h3>
                       <p className="mt-2 font-mono text-eyebrow uppercase text-ink-500">
-                        {sector.mode}
+                        {vertical.mode}
                       </p>
                     </div>
                   </StaggerChild>

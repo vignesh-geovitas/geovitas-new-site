@@ -7,35 +7,35 @@ import { Reveal } from "@/components/ui/reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { StaggerList, StaggerItem } from "@/components/ui/stagger";
 import { ArrowRight } from "@/components/ui/button";
-import { SECTORS, type SectorSlug } from "@/lib/sectors";
+import { VERTICALS, type AdvisorySlug } from "@/lib/advisory";
 
 /**
- * The three practices, as a bento of cards. Content is the single source of
- * truth in lib/sectors.ts so the homepage, the /sectors index, and each detail
- * page never disagree; the line icons live here because they are JSX, keyed
- * back to the sector slugs.
+ * The three advisory verticals, as a bento of cards. Content is the single
+ * source of truth in lib/advisory.ts so the homepage, the /advisory index, and
+ * each detail page never disagree; the line icons live here because they are
+ * JSX, keyed back to the vertical slugs.
  *
- * `showHeading` is on by default for the homepage section. The /sectors index
+ * `showHeading` is on by default for the homepage section. The /advisory index
  * suppresses it because its PageHeader already carries the title and lede.
  */
-const ICONS: Record<SectorSlug, ReactNode> = {
+const ICONS: Record<AdvisorySlug, ReactNode> = {
   "urban-local-bodies": <CityIcon />,
-  "manufacturing-export": <FactoryIcon />,
-  "oil-gas-energy": <EnergyIcon />,
+  "green-factory-360": <FactoryIcon />,
+  "energy-transition": <EnergyIcon />,
 };
 
-export function SectorPillars({ showHeading = true }: { showHeading?: boolean }) {
+export function AdvisoryBento({ showHeading = true }: { showHeading?: boolean }) {
   return (
-    <section id="sectors" className="scroll-mt-20 border-t border-ink-200 bg-ink-50">
+    <section id="advisory" className="scroll-mt-20 border-t border-ink-200 bg-ink-50">
       <Container className="py-16 sm:py-20 lg:py-32">
         {showHeading && (
           <div className="max-w-2xl">
             <Reveal>
-              <Eyebrow>Sector practices</Eyebrow>
+              <Eyebrow>Advisory verticals</Eyebrow>
             </Reveal>
             <Reveal delay={0.06}>
               <h2 className="mt-6 text-h2 font-bold text-ink-950">
-                Three practices. One evidence base.
+                Three verticals. One evidence base.
               </h2>
             </Reveal>
             <Reveal delay={0.12}>
@@ -52,9 +52,9 @@ export function SectorPillars({ showHeading = true }: { showHeading?: boolean })
               of the section, and the photographic anchor gives the rotation
               something to read against. The rest of the site's cards keep the
               flat 4px lift — see the rationing note in tilt-card.tsx. */}
-          {SECTORS.map((sector, index) => (
+          {VERTICALS.map((vertical, index) => (
             <TiltCard
-              key={sector.slug}
+              key={vertical.slug}
               delay={index * 0.08}
               className="group relative flex flex-col overflow-hidden rounded-card border
                          border-ink-200 bg-white shadow-card
@@ -63,8 +63,8 @@ export function SectorPillars({ showHeading = true }: { showHeading?: boolean })
               {/* ---- Visual anchor ---- */}
               <div className="relative aspect-video w-full overflow-hidden">
                 <Image
-                  src={sector.image}
-                  alt={sector.imageAlt}
+                  src={vertical.image}
+                  alt={vertical.imageAlt}
                   fill
                   sizes="(min-width: 1024px) 33vw, 100vw"
                   className="object-cover transition-transform duration-700 ease-brand
@@ -84,32 +84,32 @@ export function SectorPillars({ showHeading = true }: { showHeading?: boolean })
                 />
 
                 <span className="glass absolute bottom-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg text-brand-cyan-ink">
-                  {ICONS[sector.slug]}
+                  {ICONS[vertical.slug]}
                 </span>
                 <span className="tnum glass absolute top-3 right-3 rounded-md px-2 py-1 font-mono text-[0.625rem] text-ink-600">
-                  {sector.index}
+                  {vertical.index}
                 </span>
               </div>
 
               {/* ---- Copy ---- */}
               <div className="flex flex-1 flex-col p-7">
                 <p className="font-mono text-eyebrow uppercase text-brand-cyan-ink">
-                  {sector.practice}
+                  {vertical.practice}
                 </p>
-                <p className="mt-1.5 text-xs text-ink-500">{sector.mode}</p>
+                <p className="mt-1.5 text-xs text-ink-500">{vertical.mode}</p>
 
                 {/* Headlines and body wrap to different depths across the row.
                     Reserving the taller measure at lg keeps the dividers and
                     bullet lists on a shared baseline. */}
                 <h3 className="mt-4 text-h3 font-bold text-ink-950 lg:min-h-[5.25rem]">
-                  {sector.headline}
+                  {vertical.headline}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink-500 lg:min-h-[7rem]">
-                  {sector.cardBody}
+                  {vertical.cardBody}
                 </p>
 
                 <StaggerList className="mt-6 space-y-3 border-t border-ink-150 pt-6">
-                  {sector.outcomes.map((outcome) => (
+                  {vertical.outcomes.map((outcome) => (
                     <StaggerItem
                       key={outcome}
                       className="flex gap-3 text-sm leading-relaxed text-ink-600"
@@ -125,7 +125,7 @@ export function SectorPillars({ showHeading = true }: { showHeading?: boolean })
 
                 <div className="mt-7 flex-1" />
                 <Link
-                  href={`/sectors/${sector.slug}`}
+                  href={`/advisory/${vertical.slug}`}
                   className="inline-flex items-center gap-2 text-sm font-bold text-ink-950
                              transition-colors duration-200 hover:text-brand-cyan-ink"
                 >

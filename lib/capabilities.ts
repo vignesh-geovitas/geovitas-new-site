@@ -2,15 +2,15 @@
  * Single source of truth for the three energy-transition capabilities.
  *
  * These sit UNDER the Oil, Gas & Energy practice rather than beside it.
- * lib/sectors.ts already names "compressed biogas, cold cracking and carbon
+ * lib/advisory.ts already names "compressed biogas, cold cracking and carbon
  * capture" as what that practice deploys; this file is those three at the depth
  * a technical buyer needs before a capital committee will look at them. The
  * /capabilities index, the three detail routes and the cross-links on
- * /sectors/oil-gas-energy all read from here, so nothing can drift.
+ * /advisory/energy-transition all read from here, so nothing can drift.
  *
  * SOURCING. Copy is derived from Geovitas's own published Energy Transition
  * solution pages and reproduced close to source rather than paraphrased, on the
- * same reasoning as the one-pager note in app/(marketing)/about/page.tsx: the
+ * same reasoning as the one-pager note in app/(marketing)/company/page.tsx: the
  * site and the collateral should say the same thing to the same buyer. Nothing
  * here comes from the Green Factory 360 GTM deck.
  *
@@ -18,7 +18,7 @@
  * checkable against the instrument named in `sources` — the same rule
  * components/site/proof-strip.tsx holds. Geovitas's own forward-looking targets
  * and un-attributed performance ranges are deliberately absent; see the note in
- * lib/sectors.ts.
+ * lib/advisory.ts.
  *
  * ONE RECONSTRUCTION, FLAGGED. The second stage of the carbon-capture
  * deployment sequence was occluded by an overlay in the supplied capture of the

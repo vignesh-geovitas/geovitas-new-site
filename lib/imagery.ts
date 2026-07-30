@@ -129,7 +129,7 @@ export const IMAGE_SLOTS = {
     provisional: true,
     aspect: "21/9",
     label: "Three sectors, one frame",
-    placement: "/sectors — banner beneath the practice cards",
+    placement: "/advisory — banner beneath the vertical cards",
     brief:
       "High aerial photograph at dawn, near-vertical, where an industrial estate meets the edge of a dense city and open land beyond — the three sectors in a single frame. Low sun raking across roofs, long shadows, cool mist in the valleys. Muted palette: concrete grey, cool green vegetation, a teal cast in the haze. Ultra-wide cinematic crop. No text, no legible signage, no identifiable buildings or landmarks. Should read as survey photography rather than as a skyline postcard.",
     treatment: "photo",
@@ -226,7 +226,7 @@ export const IMAGE_SLOTS = {
        Restore "Chennai" as the label only when the commissioned image is
        actually shot there. */
     label: "Where we work",
-    placement: "/about — beside the company section",
+    placement: "/company — beside the company section",
     brief:
       "Early-morning elevated photograph across a South Indian city's mid-rise rooftops — water tanks, parapets, aerials, a few palms breaking the line, haze softening the far distance. Warm low sun against cool shadow. Ordinary working city, not a landmark or a tourist view. Desaturated and calm. No text, no signage, no hoardings, no identifiable people. This establishes where the company actually is — so it must genuinely be Chennai.",
     treatment: "photo",

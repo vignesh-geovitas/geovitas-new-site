@@ -8,11 +8,17 @@ import {
   REGISTERED_ADDRESS,
 } from "@/lib/contact";
 
-/** Each resolves to its own sector practice page. */
-const SECTOR_LINKS = [
-  { label: "Urban Local Bodies", href: "/sectors/urban-local-bodies" },
-  { label: "Manufacturing & Export", href: "/sectors/manufacturing-export" },
-  { label: "Oil, Gas & Energy", href: "/sectors/oil-gas-energy" },
+/**
+ * The advisory column. Labels are the practice names rather than the slugs —
+ * `green-factory-360` is a URL, "Manufacturing & Export" is what the reader is
+ * looking for — so this list is written out rather than mapped over
+ * lib/advisory.ts. The hub itself leads the column.
+ */
+const ADVISORY_LINKS = [
+  { label: "All verticals", href: "/advisory" },
+  { label: "Urban Local Bodies", href: "/advisory/urban-local-bodies" },
+  { label: "Manufacturing & Export", href: "/advisory/green-factory-360" },
+  { label: "Oil, Gas & Energy", href: "/advisory/energy-transition" },
 ] as const;
 
 /* Platform first, then the physical assets — the two halves of what we deploy
@@ -21,12 +27,18 @@ const ENGAGEMENT_LINKS = [
   { label: "Green Factory 360 AI", href: "/platform" },
   { label: "Transition capabilities", href: "/capabilities" },
   { label: "The engagement model", href: "/approach" },
-  { label: "Regulatory exposure model", href: "/#exposure" },
+  { label: "Regulatory exposure model", href: "/exposure" },
   { label: "Executive briefing", href: "/#briefing" },
 ] as const;
 
+/** Proof and credibility — the two surfaces a diligence reader goes to. */
+const PROOF_LINKS = [
+  { label: "Impact", href: "/impact" },
+  { label: "Insights", href: "/insights" },
+] as const;
+
 const COMPANY_LINKS = [
-  { label: "About", href: "/about" },
+  { label: "Company", href: "/company" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -90,29 +102,42 @@ export function SiteFooter() {
             </address>
           </div>
 
-          <FooterColumn title="Sectors" className="lg:col-span-3">
-            {SECTOR_LINKS.map((link) => (
-              <FooterLink key={link.href} href={link.href}>
-                {link.label}
-              </FooterLink>
-            ))}
-          </FooterColumn>
+          {/* Four link columns share the remaining eight of twelve, so each one
+              stays a readable measure instead of being crushed to fit a fifth
+              top-level grid child. They collapse to a 2x2 block on phones. */}
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 lg:col-span-8">
+            <FooterColumn title="Advisory">
+              {ADVISORY_LINKS.map((link) => (
+                <FooterLink key={link.href} href={link.href}>
+                  {link.label}
+                </FooterLink>
+              ))}
+            </FooterColumn>
 
-          <FooterColumn title="Engagement" className="lg:col-span-3">
-            {ENGAGEMENT_LINKS.map((link) => (
-              <FooterLink key={link.href} href={link.href}>
-                {link.label}
-              </FooterLink>
-            ))}
-          </FooterColumn>
+            <FooterColumn title="Engagement">
+              {ENGAGEMENT_LINKS.map((link) => (
+                <FooterLink key={link.href} href={link.href}>
+                  {link.label}
+                </FooterLink>
+              ))}
+            </FooterColumn>
 
-          <FooterColumn title="Company" className="lg:col-span-2">
-            {COMPANY_LINKS.map((link) => (
-              <FooterLink key={link.href} href={link.href}>
-                {link.label}
-              </FooterLink>
-            ))}
-          </FooterColumn>
+            <FooterColumn title="Proof">
+              {PROOF_LINKS.map((link) => (
+                <FooterLink key={link.href} href={link.href}>
+                  {link.label}
+                </FooterLink>
+              ))}
+            </FooterColumn>
+
+            <FooterColumn title="Company">
+              {COMPANY_LINKS.map((link) => (
+                <FooterLink key={link.href} href={link.href}>
+                  {link.label}
+                </FooterLink>
+              ))}
+            </FooterColumn>
+          </div>
         </div>
 
         {/* Frameworks rail */}

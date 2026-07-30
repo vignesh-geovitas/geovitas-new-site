@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { SECTORS } from "@/lib/sectors";
+import { VERTICALS } from "@/lib/advisory";
 import { CAPABILITIES } from "@/lib/capabilities";
 
 /**
  * Only routes that actually resolve belong here — listing a page before it
- * ships points crawlers at a 404. Add /platform, /sectors/*, /about, etc. to
+ * ships points crawlers at a 404. Add /platform, /advisory/*, /company, etc. to
  * this array as each page lands, not before.
  *
  * `priority` ranks pages relative to one another: the home page leads, the
@@ -35,13 +35,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/sectors`,
+      url: `${SITE_URL}/advisory`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    ...SECTORS.map((sector) => ({
-      url: `${SITE_URL}/sectors/${sector.slug}`,
+    ...VERTICALS.map((vertical) => ({
+      url: `${SITE_URL}/advisory/${vertical.slug}`,
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.7,
@@ -66,8 +66,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    /* Proof surfaces. /impact carries the delivered numbers, /insights the
+       regulatory commentary — the latter changes most often on the site, hence
+       the weekly frequency against everything else's monthly.
+
+       /impact is listed while still carrying `robots: { index: false }`, on the
+       same reasoning as the two legal routes below: the entry keeps the IA
+       complete and is the thing that reminds whoever lands the verified figures
+       to lift the noindex. Drop that metadata key on the page, not this entry. */
     {
-      url: `${SITE_URL}/about`,
+      url: `${SITE_URL}/impact`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/insights`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/company`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.6,

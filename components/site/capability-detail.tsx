@@ -22,7 +22,7 @@ import type { Capability } from "@/lib/capabilities";
  * One renderer for every /capabilities/[slug] page — the three route files are
  * metadata plus <CapabilityDetail capability={...} />, so a layout change lands
  * on all three at once. This is the same arrangement SectorDetail has with
- * lib/sectors.ts, and content comes entirely from lib/capabilities.ts.
+ * lib/advisory.ts, and content comes entirely from lib/capabilities.ts.
  *
  * NO PHOTOGRAPHY, DELIBERATELY. The sector pages carry an Unsplash placeholder
  * while licensed imagery is outstanding; repeating that here would have meant
@@ -56,7 +56,7 @@ export function CapabilityDetail({ capability }: { capability: Capability }) {
           Talk to an engineer
           <ArrowRight />
         </Button>
-        <Button href="/sectors/oil-gas-energy" variant="outline" size="lg">
+        <Button href="/advisory/energy-transition" variant="outline" size="lg">
           The Oil, Gas &amp; Energy practice
         </Button>
       </PageHeader>

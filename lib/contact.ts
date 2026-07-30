@@ -4,7 +4,7 @@
  * The footer, the /contact page and every mailto call to action read from here,
  * so a change of inbox or a move of the registered office is a one-line edit
  * rather than a search across the tree — the same discipline lib/site.ts applies
- * to the canonical origin and lib/sectors.ts to the practices.
+ * to the canonical origin and lib/advisory.ts to the practices.
  *
  * NOTE ON THE INBOX — OUTSTANDING DECISION. `venu@geovitas.com` is the address
  * the site's existing calls to action already point at, so it stays the

@@ -7,36 +7,36 @@ import { Button, ArrowRight } from "@/components/ui/button";
 import { Parallax } from "@/components/ui/parallax";
 import { PageHeader } from "@/components/site/page-header";
 import { CtaBlock } from "@/components/site/cta-block";
-import type { Sector } from "@/lib/sectors";
+import type { AdvisoryVertical } from "@/lib/advisory";
 
 /**
- * One renderer for every /sectors/[slug] detail page — the three route files are
- * just metadata plus <SectorDetail sector={...} />, so a change to the layout
- * lands on all three at once. Content comes entirely from lib/sectors.ts.
+ * One renderer for every /advisory/[slug] detail page — the three route files
+ * are just metadata plus <AdvisoryDetail vertical={...} />, so a change to the
+ * layout lands on all three at once. Content comes entirely from lib/advisory.ts.
  *
  * Structure holds the site's paper/white chapter rhythm under the PageHeader:
  *   header (light mesh) → context (white) → drivers (paper) → deliverables
  *   (white) → CtaBlock (dark anchor).
  */
-export function SectorDetail({ sector }: { sector: Sector }) {
+export function AdvisoryDetail({ vertical }: { vertical: AdvisoryVertical }) {
   return (
     <>
       <PageHeader
-        eyebrow={sector.mode}
-        title={sector.practice}
-        lede={sector.lede}
+        eyebrow={vertical.mode}
+        title={vertical.practice}
+        lede={vertical.lede}
         breadcrumb={[
           { label: "Home", href: "/" },
-          { label: "Sectors", href: "/sectors" },
-          { label: sector.practice },
+          { label: "Advisory", href: "/advisory" },
+          { label: vertical.practice },
         ]}
       >
         <Button href="#briefing" variant="primary" size="lg">
           Schedule a briefing
         </Button>
-        {sector.related[0] && (
-          <Button href={sector.related[0].href} variant="outline" size="lg">
-            {sector.related[0].label}
+        {vertical.related[0] && (
+          <Button href={vertical.related[0].href} variant="outline" size="lg">
+            {vertical.related[0].label}
           </Button>
         )}
       </PageHeader>
@@ -47,10 +47,10 @@ export function SectorDetail({ sector }: { sector: Sector }) {
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-6">
               <Reveal>
-                <h2 className="text-h2 font-bold text-ink-950">{sector.headline}</h2>
+                <h2 className="text-h2 font-bold text-ink-950">{vertical.headline}</h2>
               </Reveal>
               <div className="mt-6 space-y-5">
-                {sector.context.map((paragraph, index) => (
+                {vertical.context.map((paragraph, index) => (
                   <Reveal key={index} delay={0.06 + index * 0.05}>
                     <p className="text-lead text-ink-600">{paragraph}</p>
                   </Reveal>
@@ -67,8 +67,8 @@ export function SectorDetail({ sector }: { sector: Sector }) {
                   <Parallax className="absolute inset-0" speed={0.07}>
                     <div className="relative h-full w-full">
                       <Image
-                        src={sector.image}
-                        alt={sector.imageAlt}
+                        src={vertical.image}
+                        alt={vertical.imageAlt}
                         fill
                         sizes="(min-width: 1024px) 45vw, 100vw"
                         className="object-cover transition-transform duration-700 ease-brand
@@ -77,14 +77,14 @@ export function SectorDetail({ sector }: { sector: Sector }) {
                     </div>
                   </Parallax>
                   {/* Brand wash — the same family treatment as the homepage
-                      sector cards, so the photography reads as one system. */}
+                      vertical cards, so the photography reads as one system. */}
                   <div
                     aria-hidden
                     className="absolute inset-0 bg-gradient-to-t from-ink-950/45 via-ink-950/5 to-transparent"
                   />
                   <div aria-hidden className="absolute inset-0 bg-brand-cyan/10" />
                   <figcaption className="glass absolute bottom-4 left-4 rounded-md px-3 py-1.5 font-mono text-eyebrow uppercase text-ink-600">
-                    {sector.mode}
+                    {vertical.mode}
                   </figcaption>
                 </figure>
               </Reveal>
@@ -109,7 +109,7 @@ export function SectorDetail({ sector }: { sector: Sector }) {
             className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2"
             step={0.08}
           >
-            {sector.drivers.map((driver) => (
+            {vertical.drivers.map((driver) => (
               <StaggerChild key={driver.title} className="pt-6">
                 <span
                   aria-hidden
@@ -149,10 +149,10 @@ export function SectorDetail({ sector }: { sector: Sector }) {
                   What an engagement leaves behind.
                 </h2>
               </Reveal>
-              {sector.related.length > 0 && (
+              {vertical.related.length > 0 && (
                 <Reveal delay={0.12}>
                   <div className="mt-8 flex flex-col gap-3">
-                    {sector.related.map((link) => (
+                    {vertical.related.map((link) => (
                       <Button
                         key={link.href}
                         href={link.href}
@@ -171,7 +171,7 @@ export function SectorDetail({ sector }: { sector: Sector }) {
 
             <div className="lg:col-span-7 lg:col-start-6">
               <StaggerList className="space-y-0">
-                {sector.deliverables.map((deliverable) => (
+                {vertical.deliverables.map((deliverable) => (
                   <StaggerItem
                     key={deliverable}
                     className="flex gap-4 border-t border-ink-200 py-5 first:border-t-0 first:pt-0 text-[0.9375rem] leading-relaxed text-ink-600"

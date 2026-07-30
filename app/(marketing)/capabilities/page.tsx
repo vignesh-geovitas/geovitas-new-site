@@ -37,7 +37,7 @@ export default function CapabilitiesPage() {
           { label: "Transition capabilities" },
         ]}
       >
-        <Button href="/sectors/oil-gas-energy" variant="primary" size="lg">
+        <Button href="/advisory/energy-transition" variant="primary" size="lg">
           The Oil, Gas &amp; Energy practice
           <ArrowRight />
         </Button>
@@ -155,7 +155,7 @@ export default function CapabilitiesPage() {
               <Reveal delay={0.06}>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Button
-                    href="/sectors/oil-gas-energy"
+                    href="/advisory/energy-transition"
                     variant="outline"
                     size="md"
                     className="justify-between"
@@ -164,7 +164,7 @@ export default function CapabilitiesPage() {
                     <ArrowRight />
                   </Button>
                   <Button
-                    href="/sectors"
+                    href="/advisory"
                     variant="outline"
                     size="md"
                     className="justify-between"

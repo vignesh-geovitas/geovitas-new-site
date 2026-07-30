@@ -1,10 +1,17 @@
 /**
- * Single source of truth for the three sector practices.
+ * Single source of truth for the three advisory verticals.
  *
- * The homepage bento (components/site/sector-pillars.tsx), the /sectors index,
- * and each /sectors/[slug] detail page all read from here, so the practice
+ * The homepage bento (components/site/advisory-bento.tsx), the /advisory index,
+ * and each /advisory/[slug] detail page all read from here, so the practice
  * names, modes, and outcomes never drift between surfaces. Icons live with the
  * card component (they are JSX) and are keyed back to these slugs.
+ *
+ * SLUGS ARE THE PUBLISHED URLs. They are deliberately market-facing rather than
+ * descriptive — `green-factory-360` is the name buyers search for, even though
+ * the practice it opens is titled "Manufacturing & Export". Note the adjacency
+ * to the *platform* of the same name: /platform is the software, this vertical
+ * is the advisory work sold around it. Renaming a slug is a breaking URL change
+ * and needs a matching entry in the redirects block of next.config.ts.
  *
  * ALTITUDE / SOURCING. Copy stays at the site's CFO-facing altitude and invents
  * no clients, quotes, or performance metrics. Regulatory specifics (CBAM, its
@@ -18,23 +25,23 @@
  * `images.unsplash.com` entry from next.config.ts.
  */
 
-export type SectorSlug =
+export type AdvisorySlug =
   | "urban-local-bodies"
-  | "manufacturing-export"
-  | "oil-gas-energy";
+  | "green-factory-360"
+  | "energy-transition";
 
-export type SectorDriver = {
+export type VerticalDriver = {
   title: string;
   body: string;
 };
 
-export type SectorLink = {
+export type VerticalLink = {
   label: string;
   href: string;
 };
 
-export type Sector = {
-  slug: SectorSlug;
+export type AdvisoryVertical = {
+  slug: AdvisorySlug;
   index: string;
   /** Practice name — the H1 on the detail page. */
   practice: string;
@@ -59,14 +66,14 @@ export type Sector = {
   /** Detail context paragraphs, under the headline. */
   context: readonly string[];
   /** What is driving the work — four forces. */
-  drivers: readonly SectorDriver[];
+  drivers: readonly VerticalDriver[];
   /** What an engagement leaves behind — the expanded outcomes. */
   deliverables: readonly string[];
   /** Cross-links surfaced at the foot of the detail page. */
-  related: readonly SectorLink[];
+  related: readonly VerticalLink[];
 };
 
-export const SECTORS: readonly Sector[] = [
+export const VERTICALS: readonly AdvisoryVertical[] = [
   {
     slug: "urban-local-bodies",
     index: "01",
@@ -118,7 +125,7 @@ export const SECTORS: readonly Sector[] = [
     related: [{ label: "The engagement model", href: "/approach" }],
   },
   {
-    slug: "manufacturing-export",
+    slug: "green-factory-360",
     index: "02",
     practice: "Manufacturing & Export",
     mode: "Advisory + Platform",
@@ -171,7 +178,7 @@ export const SECTORS: readonly Sector[] = [
     ],
   },
   {
-    slug: "oil-gas-energy",
+    slug: "energy-transition",
     index: "03",
     practice: "Oil, Gas & Energy",
     mode: "Physical infrastructure",
@@ -228,8 +235,8 @@ export const SECTORS: readonly Sector[] = [
   },
 ];
 
-export const SECTORS_BY_SLUG: Readonly<Record<SectorSlug, Sector>> =
-  Object.fromEntries(SECTORS.map((sector) => [sector.slug, sector])) as Record<
-    SectorSlug,
-    Sector
-  >;
+export const VERTICALS_BY_SLUG: Readonly<
+  Record<AdvisorySlug, AdvisoryVertical>
+> = Object.fromEntries(
+  VERTICALS.map((vertical) => [vertical.slug, vertical]),
+) as Record<AdvisorySlug, AdvisoryVertical>;
